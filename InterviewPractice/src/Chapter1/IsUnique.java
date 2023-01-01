@@ -7,20 +7,28 @@ public class IsUnique {
     /*
     Implement an algorithm to determine if a string is all unique characters.
     What if you cannot use additional data structures?
+    question pg 101
+    solution pg 203
      */
 
     public static boolean isUniqueDS(String s) {
         //we use an ArrayList to keep track of all the characters we've currently found
         ArrayList<String> foundChar= new ArrayList<>();
 
+        if(s.length() > 256) {
+            //we make this check since there are only 256 unique characters in the ASCII extended
+            //vocabulary, so if our string is greater than that in length it cannot be all unique
+            return false;
+        }
+
         //we iterate through every character in s using the substring command
         for(int i = 0; i < s.length(); i++) {
-            String currLetter = s.substring(i, i+1);
-            if(foundChar.contains(currLetter)) {
+            char currLetter = s.charAt(i);
+            if(foundChar.contains(String.valueOf(currLetter))) {
                 return false;
             }
             else {
-                foundChar.add(currLetter);
+                foundChar.add(String.valueOf(currLetter));
             }
         }
         return true;
@@ -48,6 +56,10 @@ public class IsUnique {
             }
         }
         return true;
+
+        //this solution has runtime O(N^2). We could have a faster solution by using a sorting algorithm
+        //but that would require higher space complexity, and this is less a sorting question
+        //than a String question.
     }
 
     public static void main(String[] args) {
