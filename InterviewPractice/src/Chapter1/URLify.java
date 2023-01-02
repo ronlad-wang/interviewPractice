@@ -40,7 +40,30 @@ public class URLify {
         return String.copyValueOf(c);
     }
 
+    public static String URLifyOptimized(String s, int trueLength) {
+        char[] c = s.toCharArray();
+        int index = s.length() - 1;
+        //introducing the index variable is a really smart change that means we no longer
+        //need to iterate backwards when we detect a space
+        //instead the index variable keeps track of where we last added a character to the modified
+        //char[], and when we detect a ' ', we move forward index by 3
+
+        for(int i = trueLength - 1; i >= 0; i--) {
+            if(c[i] == ' ') {
+                c[index] = '0';
+                c[index - 1] = '2';
+                c[index - 2] = '%';
+                index = index - 3;
+            }
+            else {
+                c[index] = c[i];
+                index--;
+            }
+        }
+        return String.copyValueOf(c);
+    }
+
     public static void main(String[] args) {
-        System.out.println(URLify("Mr John Smith    ", 13));
+        System.out.println(URLifyOptimized("Mr John Smith    ", 13));
     }
 }
