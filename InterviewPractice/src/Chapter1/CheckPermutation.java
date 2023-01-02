@@ -7,7 +7,7 @@ public class CheckPermutation {
     /*
     Given two strings, write a method to determine if one is a permutation of the other.
     question pg 101
-    solution pg 203
+    solution pg 204
      */
 
     public static boolean isPerm(String a, String b) {
@@ -44,11 +44,43 @@ public class CheckPermutation {
         //but the fastest sorting algorithm has runtime O(NlogN), which is slower.
     }
 
+    public static boolean isPermOptimized(String a, String b) {
+        //Also good to note that we should've checked to see if things like whitespace
+        //or case sensitivity mattered in the question, i.e. if "GOD" is a permutation of "god"
+        //or if "       dog" is a permutation of "god".
+
+        if(a.length() != b.length()) {
+            return false;
+        }
+
+        //key difference in this solution is realizing we don't need to use an extra array to
+        //store the characters in B
+        int[] charsInA = new int[256];
+
+        for(int i = 0; i < a.length(); i++) {
+            charsInA[a.charAt(i)] += 1;
+        }
+
+        for(int i = 0; i < b.length(); i++) {
+            //this new for loop removes the purpose of a second array
+            charsInA[b.charAt(i)] -= 1;
+            if(charsInA[b.charAt(i)] < 0) {
+                return false;
+            }
+        }
+
+        //note that we don't need to check to see if there are any leftover characters in the array
+        //this is because if the two strings are of equal size, then it is either true that
+        //they are a permutation, or at least one value in the charArray will be < 0, in which case
+        //we return false.
+        return true;
+    }
+
     public static void main(String[] args) {
         //testing
-        System.out.println(isPerm("abcdefg", "gfedcba"));
-        System.out.println(isPerm("abcdefg", "gfedcbe"));
-        System.out.println(isPerm("a lazy brown fox jumped over a 9192348", "9248319 a fox brown jumped over lazy a"));
-        System.out.println(isPerm("-+=/.,<>", "+/.,><=-"));
+        System.out.println(isPermOptimized("abcdefg", "gfedcba"));
+        System.out.println(isPermOptimized("abcdefg", "gfedcbe"));
+        System.out.println(isPermOptimized("a lazy brown fox jumped over a 9192348", "9248319 a fox brown jumped over lazy a"));
+        System.out.println(isPermOptimized("-+=/.,<>", "+/.,><=-"));
     }
 }
