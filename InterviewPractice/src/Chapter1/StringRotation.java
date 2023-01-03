@@ -28,4 +28,8 @@ public class StringRotation {
         }
         return false;
     }
+
+    public static boolean isSubstring(String s1, String s2) {
+        return true;
+    }
 }
