@@ -48,6 +48,53 @@ public class StringCompression {
         //this is the fastest asymptotic runtime we can get.
     }
 
+    public static String spaceOptimizedCompress(String s) {
+        //this is an alternate solution to Compress that is more space efficient and can be more
+        //time efficient in cases where the compressed string is not shorter than the original string
+        //however, it has more duplicated code and is not necessarily faster than the original solution
+
+        int compressedLength = compareLengths(s);
+        if(compressedLength >= s.length()) {
+            return s;
+        }
+
+        StringBuilder compressed = new StringBuilder(compressedLength);
+        //notice that the new compareLengths function also helps us save space on our StringBuilder
+        //because we know the exact length of the end string, we can prevent any unecessary resizing
+        //at worst, without specifying a length we could end up with twice the necessary space
+        //allocated to storing our end string
+
+        int numConsecutive = 0;
+        for(int i = 0; i < s.length(); i++) {
+            numConsecutive++;
+            if(i + 1 >= s.length() || s.charAt(i) != s.charAt(i+1)) {
+                compressed.append(s.charAt(i));
+                compressed.append(numConsecutive);
+                numConsecutive = 0;
+            }
+        }
+
+        return compressed.toString();
+        //this function is also runtime O(N), but has more for loops and more duplicated code
+        //there are upsides to both solutions
+    }
+
+    public static int compareLengths(String s) {
+        //a helper function which can check if the compressed string will be smaller than the original
+        //before we commit memory to a StringBuilder.
+        char currChar = '{';
+        int numChars = 0;
+        for(int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) != currChar) {
+                numChars++;
+                currChar = s.charAt(i);
+            }
+        }
+        return numChars * 2;
+        //we do numChars * 2 since each character will have its character and a number next to it,
+        //producing a string of length numChars * 2
+    }
+
     public static void main(String[] args) {
         System.out.println(compress("aabccccaaa"));
         System.out.println(compress("abca"));
