@@ -66,6 +66,67 @@ public class ZeroMatrix {
         }
     }
 
+    public static int[][] zeroOptimized(int[][] m) {
+        //in the space optimized solution instead of creating a new array for the rows and columns
+        //that contain 0, we can instead use the first row and first column to store which rows/columns
+        //have zeroes. This solution makes it so that our space complexity is 1, since everything is
+        //in place.
+
+        //however, it does run into a few issues because now we need to perform a separate check to see
+        //if the first row and column have 0 in them, since we are storing 0s in those columns, so
+        //we can no longer check them at the end to know if they have 0s. This leads to a lot of
+        //repeated code.
+
+        boolean firstRowHasZero = false;
+        boolean firstColumnHasZero = false;
+
+        for(int i = 0; i < m.length; i++) {
+            for(int j = 0; j < m[1].length; j++) {
+                if(m[i][j] == 0) {
+                    if(i == 0) {
+                        firstColumnHasZero = true;
+                    }
+                    if(j == 0) {
+                        firstColumnHasZero = true;
+                    }
+                    m[i][0] = 0;
+                    m[0][j] = 0;
+                }
+            }
+        }
+        System.out.println();
+        printMatrix(m);
+        System.out.println();
+
+        for(int i = 1; i < m.length; i++) {
+            if(m[i][0] == 0) {
+                for(int j = 0; j < m[1].length; j++) {
+                    m[i][j] = 0;
+                }
+            }
+        }
+        for(int i = 1; i < m[0].length; i++) {
+            if(m[0][i] == 0) {
+                for(int j = 0; j < m.length; j++) {
+                    m[j][i] = 0;
+                }
+            }
+        }
+
+        if(firstColumnHasZero) {
+            for(int j = 0; j < m.length; j++) {
+                m[0][j] = 0;
+            }
+        }
+        if(firstRowHasZero) {
+            for(int j = 0; j < m.length; j++) {
+                m[j][0] = 0;
+            }
+        }
+
+        return m;
+    }
+
     public static void main(String[] args) {
         int[][] m = new int[5][6];
         for(int i = 0; i < 5; i++) {
@@ -76,6 +137,6 @@ public class ZeroMatrix {
 
         printMatrix(m);
         System.out.println();
-        printMatrix(zero(m));
+        printMatrix(zeroOptimized(m));
     }
 }
