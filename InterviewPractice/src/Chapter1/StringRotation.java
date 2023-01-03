@@ -16,4 +16,16 @@ public class StringRotation {
         String s1s1 = s1 + s1;
         return isSubstring(s2, s1s1);
     }
+
+    public static boolean isRotationOptimized(String s1, String s2) {
+        //You can introduce a slight optimization and deal with edge cases by checking to see
+        //first if the two strings are of equal length, which is not equal to zero.
+        //then we can save space on not storing s1s1.
+
+        if(s1.length() == s2.length() && s1.length() != 0) {
+            String s1s1 = s1 + s1;
+            return isSubstring(s2, s1s1);
+        }
+        return false;
+    }
 }
