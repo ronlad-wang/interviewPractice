@@ -27,4 +27,18 @@ public class Node<T> {
                 counter = counter.next;
             }
         }
+
+        public boolean isEqual(Node n) {
+            Node temp1 = this;
+            while(temp1 != null && n != null) {
+                if(temp1.item != n.item) {
+                    return false;
+                }
+                temp1 = temp1.next;
+                n = n.next;
+            }
+
+            //this last check is to make sure that they are the same size.
+            return temp1 == null && n == null;
+        }
     }

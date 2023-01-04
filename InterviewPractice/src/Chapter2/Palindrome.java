@@ -40,9 +40,44 @@ public class Palindrome {
         //structures.
     }
 
-    public static boolean isPalindromSLList(Node n) {
+    public static boolean isPalindromeSLList(Node n) {
         //alternate solution if the given list is SLList. This means our solution of iterating
         //backwards is no longer possible.
-        return false;
+        //if we can create a new list that is a reversed copy of N, and that new list is also
+        //identical to n, then n must be a palindrome.
+
+        if(n == null) {
+            return true;
+        }
+
+        //newList will be our reversed order of n
+        Node newList = new Node(n.item);
+        Node counter = n.next;
+        while(counter != null) {
+            Node temp = new Node(counter.item);
+            temp.next = newList;
+            newList = temp;
+            counter = counter.next;
+        }
+
+        return n.isEqual(newList);
+        //isEqual has a runtime of O(N), check the Node class for its implementation
+        //note also that we implemented a new function isEqual to solve this, it's way cleaner
+        //to delegate tasks like that to new functions as opposed to keeping them all in the same function
+
+        //this new function still has runtime O(N), but it has space O(N) since we need to create
+        //a new Linked list.
+    }
+
+    public static void main(String[] args) {
+        Node test1 = new Node(7);
+        test1.next = new Node(1);
+        test1.next.next = new Node(6);
+        test1.next.next.next = new Node(5);
+        test1.next.next.next.next = new Node(6);
+        test1.next.next.next.next.next = new Node(1);
+        test1.next.next.next.next.next.next = new Node(7);
+
+        System.out.println(isPalindromeSLList(test1));
     }
 }
