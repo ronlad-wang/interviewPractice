@@ -19,4 +19,12 @@ public class Node<T> {
             item = input;
             next = n;
         }
+
+        public void printNode() {
+            Node counter = this;
+            while(counter.next != null) {
+                System.out.print(counter.item + " ");
+                counter = counter.next;
+            }
+        }
     }
