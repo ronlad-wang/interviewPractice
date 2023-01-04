@@ -15,4 +15,8 @@ public class Node<T> {
             next = n;
             prev = p;
         }
+        public Node(T input, Node n) {
+            item = input;
+            next = n;
+        }
     }
