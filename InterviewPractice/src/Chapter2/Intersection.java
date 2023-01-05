@@ -68,6 +68,11 @@ public class Intersection {
                 shorterList = shorterList.next;
             }
         }
+
+
+        //runtime of this function will be O(N), where N is the length of the longer list,
+        //since we need to iterate fully through the lists once
+        //its space complexity is still O(1), since we never need to create new data structures
     }
 
 
