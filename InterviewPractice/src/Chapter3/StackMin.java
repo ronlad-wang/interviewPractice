@@ -73,6 +73,17 @@ public class StackMin {
     }
 
     public void bookSolution() {
-        
+        /*
+        The book solution considers the same solution I do but doesn't seem to take into amortized
+        runtime, so I presume something must be wrong about that solution.
+
+        However, it proposes a smart idea to update the individual nodes of the stack to keep
+        track of an int, the minimum of the stack beneath it. When we add nodes, we update
+        this value, by comparing the node's value and the minimum of the node beneath it, then
+        selecting whichever is smaller.
+
+        Returning the min is simple because we just return the min value of whatever node
+        is at the top of the stack.
+         */
     }
 }
