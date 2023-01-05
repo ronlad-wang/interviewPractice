@@ -22,7 +22,7 @@ public class Node<T> {
 
         public void printNode() {
             Node counter = this;
-            while(counter.next != null) {
+            while(counter != null) {
                 System.out.print(counter.item + " ");
                 counter = counter.next;
             }
