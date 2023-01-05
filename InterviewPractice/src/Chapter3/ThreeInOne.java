@@ -1,3 +1,5 @@
+package Chapter3;
+
 public class ThreeInOne {
     /*
      Describe how you could use a single array to implement three stacks.
@@ -21,6 +23,20 @@ public class ThreeInOne {
         This way no matter how large one stack is it will not interfere with the other stacks.
         To remove we keep track of the last index (the item at the top of the stack), return the
         item at that index then move the index back by 3 to the next item.
+         */
+    }
+
+    public static void bookSolution() {
+        return;
+
+        /*
+        The book's solution also mentions the original inefficient solution, just that we need to
+        perform resizing operations if our stacks get too large.
+        It also points out my solution, but notes that there are space issues, you may need an array of
+        size 3N to store N total information if only one stack contains information.
+
+        The main takeaway is that when you describe the implementation you don't need to write actual code
+        the interviewer isn't expecting it either, focus on describing pseudocode and TODOs.
          */
     }
 }
