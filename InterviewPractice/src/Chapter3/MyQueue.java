@@ -24,18 +24,19 @@ public class MyQueue<T> {
      */
 
     public void add(T item) {
+        //slight modification the book makes here is to keep the items in s2 until we
+        //need them in S1, this decreases runtime in the case we need to remove repeatedly
+        moveInto(s2, s1);
         s1.push(item);
     }
     public T remove() {
         moveInto(s1, s2);
         T temp = (T) s2.pop();
-        moveInto(s2, s1);
         return temp;
     }
     public T peek() {
         moveInto(s1, s2);
         T temp = (T) s2.peek();
-        moveInto(s2, s1);
         return temp;
     }
 
