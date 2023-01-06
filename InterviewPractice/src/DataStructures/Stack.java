@@ -42,7 +42,11 @@ public class Stack<T> {
     }
 
     public void push(T i) {
-        if(top.getItem() == null) {
+        if(top == null) {
+            StackNode temp = new StackNode(i);
+            temp.setUnder(top);
+            top = temp;
+        } else if (top.getItem() == null ) {
             top.setItem(i);
         }
         else {
@@ -63,13 +67,13 @@ public class Stack<T> {
     }
 
     public boolean isEmpty() {
-        return top == null && top.getItem() == null;
+        return top == null || top.getItem() == null;
     }
 
     public void printStack() {
         StackNode temp = top;
         System.out.println("top -> bottom");
-        while(temp != null && temp.getItem() == null) {
+        while(temp != null && temp.getItem() != null) {
             System.out.print(temp.getItem() + " ");
             temp = temp.getUnder();
         }
