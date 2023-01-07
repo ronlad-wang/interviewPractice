@@ -8,6 +8,7 @@ public class GraphNode {
 
     public GraphNode(int i) {
         item = i;
+        connections = new ArrayList<GraphNode>();
     }
     public void connect(GraphNode to) {
         connections.add(to);
