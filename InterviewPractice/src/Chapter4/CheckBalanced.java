@@ -10,6 +10,9 @@ public class CheckBalanced {
      */
 
     public static int isBalanced(BinaryNode root) {
+        //if it returns 0, 0 has a truthy value of false, so this can be treated as a boolean.
+        //it will only return 0 if an inbalance has been found
+
         int leftDepth;
         int rightDepth;
 
@@ -58,6 +61,6 @@ public class CheckBalanced {
     }
 
     public static void main(String[] args) {
-        
+
     }
 }
