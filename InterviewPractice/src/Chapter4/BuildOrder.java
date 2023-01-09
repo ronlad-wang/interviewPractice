@@ -62,5 +62,5 @@ public class BuildOrder {
         return graph;
     }
 
-    public static 
+    public static
 }
