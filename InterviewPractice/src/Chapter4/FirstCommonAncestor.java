@@ -34,6 +34,9 @@ public class FirstCommonAncestor {
         BinaryNode b1Pointer = b1;
         BinaryNode b2Pointer = b2;
 
+
+        //we begin by finding the depths of each of the two nodes
+
         while(b1Pointer != null) {
             b1Pointer = b1Pointer.parent;
             b1Depth++;
@@ -43,6 +46,9 @@ public class FirstCommonAncestor {
             b2Pointer = b2Pointer.parent;
             b2Depth++;
         }
+
+        //next we need to find which of the two is lower, and bring it up to the level
+        //of the higher node
 
         int minDepth;
         int maxDepth;
@@ -62,10 +68,15 @@ public class FirstCommonAncestor {
             higherPointer = b2;
         }
 
+        //we bring the lower node upwards
+
         while(maxDepth > minDepth) {
             lowerPointer = lowerPointer.parent;
             maxDepth--;
         }
+
+        //once they are on the same level we can iterate upwards at the same place and know that
+        //eventually the two will intersect
 
         while(higherPointer != lowerPointer) {
             lowerPointer = lowerPointer.parent;
