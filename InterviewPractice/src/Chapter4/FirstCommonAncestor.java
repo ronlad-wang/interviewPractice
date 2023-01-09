@@ -38,11 +38,17 @@ public class FirstCommonAncestor {
         //we begin by finding the depths of each of the two nodes
 
         while(b1Pointer != null) {
+            if(b1Pointer == b2) {
+                return b1Pointer;
+            }
             b1Pointer = b1Pointer.parent;
             b1Depth++;
         }
 
         while(b2Pointer != null) {
+            if(b2Pointer == b1) {
+                return b2Pointer;
+            }
             b2Pointer = b2Pointer.parent;
             b2Depth++;
         }
@@ -84,5 +90,61 @@ public class FirstCommonAncestor {
         }
 
         return higherPointer;
+    }
+
+
+    public static BinaryNode findCommonAncestorNoParents(BinaryNode root, BinaryNode b1, BinaryNode b2) {
+        /*
+        This implementation works under the assumption that we will not have access to the parent
+        of a given node from the node itself
+
+        This solution relies on the fact that if we iterate recursively from the root downwards, heading down
+        whichever branch (left or right), contains both b1 and b2, eventually b1 and b2 will be in different
+        branches. At this point, it means that we have found the point at which they separate.
+        There is also the case where the node we check is b1 or b2, in which case we return that node.
+        */
+
+        if(!contains(root, b1) || !contains(root, b2)) {
+            //catches a special case where b1 and b2 are not in the same tree
+
+            System.out.println("nodes are not in the same tree");
+            return null;
+        }
+
+        while(true) {
+            //we are guaranteed to find a connection somewhere, so we can use while(true)
+
+            if(root == b1 || root == b2) {
+                return root;
+            }
+
+            boolean b1OnLeft = contains(root.left, b1);
+            boolean b2OnLeft = contains(root.left, b2);
+
+            if(b1OnLeft != b2OnLeft) {
+                //if they are not on the same branch then this is the point where the two split off
+                return root;
+            }
+
+            //otherwise we need to keep looking
+            //this is a cool notation I just learned, the ? takes the boolean to the left of it,
+            //if it is true, then it sets root to root.left, otherwise it sets root to root.right
+            root = b1OnLeft ? root.left : root.right;
+        }
+
+
+    }
+
+    public static boolean contains(BinaryNode root, BinaryNode b) {
+        //this helper function checks to see if a given node is the root to a tree which contains b
+        //its runtime is N, where N is the number of nodes in the tree formed by root
+
+        if(root == null) {
+            return false;
+        }
+        if(root == b) {
+            return true;
+        }
+        return contains(root.right, b) || contains(root.left, b);
     }
 }
