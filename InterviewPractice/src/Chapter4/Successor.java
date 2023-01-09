@@ -34,25 +34,14 @@ public class Successor {
 
         //if the right node doesn't exist that means we've exhausted the current subtree and
         //need to return to the parent
-
-        if (root.parent == null) {
-            System.out.println("This is the final node in our in-order traversal");
-            return null;
-        }
-
-
-        //If we were the left subtree of our parent we need to return the parent's item in accordance
-        //with in-order traversal
-        if(root == root.parent.left) {
-            return root.parent;
-        }
-
-
         //if we are not the left child we must be the right child. We have to iterate until either
         //we are at the top of the entire tree or find that the current node is the left child of
         //its parent. When we are the left child, then we need to return the parent's item
-        BinaryNode slowRunner = root.parent;
-        BinaryNode fastRunner = root.parent.parent;
+
+        //cut out the previous two if statements since they were extraneous and the cases they covered
+        //are covered better by shifting slowrunner and fastrunner back by one.
+        BinaryNode slowRunner = root;
+        BinaryNode fastRunner = root.parent;
 
         while(fastRunner != null) {
             if(slowRunner == fastRunner.left) {
