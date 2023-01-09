@@ -1,5 +1,9 @@
 package Chapter4;
 
+import DataStructures.GraphNode;
+
+import java.util.List;
+
 public class BuildOrder {
 
     /*
@@ -30,22 +34,33 @@ public class BuildOrder {
         While doing this we also keep track of which nodes have no edges directed to them. We'll need
         this for later.
 
-        Once we finish creating the graph, we perform a *post order DFS* search on each of the nodes.
-        Note the use of post order DFS searches, this is important for the case where a node is a
-        dependency for another node that cannot immediately follow it (i.e. D is dependent on B and C,
-        while C is also dependent on B. In which case, C cannot immediately follow D, which would cause
-        an issue if we used a BFS)
-
-        But, we need to maintain a list of visited nodes throughout the DFS searches.
-        Our multiple DFS searches combined should not visit the same node twice.
-        Finally, our solution will be the output from those DFS searches ARRANGED IN REVERSE ORDER
-        OF THE ORDER IN WHICH THEIR CORRESPONDING DFS SEARCHES TOOK PLACE
-        this important order reversal solves a problem with double dependencies. To see this problem
-        try doing the example with dependency (e, a) instead of (f, a), it comes up when you have
-        multiple top nodes that are required for a particular node inside the graph with multiple
-        dependencies
+        Once we finish creating the graph, we first add to our build order the nodes which have no edges
+        directed to them
+        then, we remove those nodes and their associated edges
+        now we can add the remaining nodes with no edges directed to them to the build order
+        we continue this until either we are out of edges,
+        OR
+        we do this process once and there are no new nodes that have no edges directed to them
         */
 
-        
+        Graph graph = buildGraph(projects, dependencies);
+        return orderProjects(graph.getNodes());
     }
+
+    public static Graph buildGraph(int[] projects, int[][] dependencies) {
+        Graph graph = new Graph();
+        for(int i: projects) {
+            graph.createNode(i);
+        }
+
+        for(int[] dependency : dependencies) {
+            int first = dependency[0];
+            int second = dependency[1];
+            graph.addEdge(first, second);
+        }
+
+        return graph;
+    }
+
+    public static 
 }
