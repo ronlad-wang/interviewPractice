@@ -4,6 +4,7 @@ public class BinaryNode {
     public int item;
     public BinaryNode left;
     public BinaryNode right;
+    public BinaryNode parent;
 
     public BinaryNode(int i) {
         item = i;
