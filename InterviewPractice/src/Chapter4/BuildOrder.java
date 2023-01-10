@@ -41,13 +41,14 @@ public class BuildOrder {
         we continue this until either we are out of edges,
         OR
         we do this process once and there are no new nodes that have no edges directed to them
-        */
+
 
         Graph graph = buildGraph(projects, dependencies);
-        return orderProjects(graph.getNodes());
+        return orderProjects(graph.getNodes()); */
+        return null;
     }
 
-    public static Graph buildGraph(int[] projects, int[][] dependencies) {
+   /* public static Graph buildGraph(int[] projects, int[][] dependencies) {
         Graph graph = new Graph();
         for(int i: projects) {
             graph.createNode(i);
@@ -60,7 +61,5 @@ public class BuildOrder {
         }
 
         return graph;
-    }
-
-    public static
+    } */
 }

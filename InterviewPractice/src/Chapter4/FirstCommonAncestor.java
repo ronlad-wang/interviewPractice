@@ -1,8 +1,6 @@
 package Chapter4;
 
 import DataStructures.BinaryNode;
-import DataStructures.Node;
-import jdk.incubator.vector.VectorOperators;
 
 public class FirstCommonAncestor {
 
