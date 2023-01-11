@@ -75,5 +75,8 @@ public class RandomNode {
             else {
                 right = new RandomNode(i, this);
         }
+
+            int[] ajsd = new int[2];
+            ajsd.
     }
 } }
