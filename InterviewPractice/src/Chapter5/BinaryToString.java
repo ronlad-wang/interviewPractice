@@ -8,19 +8,17 @@ public class BinaryToString {
      */
 
     public static void binaryToString(double num) {
-        int count = 0;
         double powOfTwo = 0.5;
-        String toString = "0.";
+        StringBuilder toString = new StringBuilder(".");
         while(num != 0) {
             if(num > powOfTwo) {
-                toString += "1";
+                toString.append('1');
             }
             else {
-                toString += "0";
+                toString.append('0');
             }
             powOfTwo /= 2;
-            count++;
-            if(count > 32) {
+            if(toString.length() > 32) {
                 System.out.println("error");
                 return;
             }
